@@ -1,0 +1,90 @@
+@font-face {
+    font-family: "Sen";
+    src: url("../fonts/Sen-VariableFont_wght.woff2") format("woff2");
+}
+
+*,::before, ::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-light: #faf6ee;
+    --bg-dark: #f5efe6;
+    --txt-light: #1f2a44;
+    --txt-dark: #1C2437;
+    --primary: #8c2f39;
+    --onpr: #faf6ee;
+}
+
+[data-theme="dark"] {
+    --bg-light: #161a26;
+    --bg-dark: #1e2333;
+    --txt-light: #ede6d6;
+    --txt-dark: #F5EFE6;
+    --primary: #d98a8f;
+    --onpr: #161a26;
+}
+
+body {
+    margin: 0;
+    font-family: Sen, system-ui, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--txt-light);
+    line-height: 1.5;
+    font-size: 1.125rem;
+}
+
+h1,h2 {line-height:1.2;
+    margin:0 0 .5em;
+}
+h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+}
+h2 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+a {
+    color: inherit;
+}
+
+u {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 3px;
+}
+
+.wrap {
+    padding: 4rem clamp(1rem, 6vw, 6rem);
+}
+
+.alt {
+    background: var(--bg-dark);
+}
+
+.lbl {
+    font-size: .9rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.center {
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
+.btn {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--onpr);
+    padding: .8rem 1.4rem;
+    font: 700 1rem Sen, sans-serif;
+    border: 2px solid var(--primary);
+    text-decoration: none;
+    cursor: pointer;
+}

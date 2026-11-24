@@ -3,21 +3,44 @@
     src: url("../fonts/Sen-VariableFont_wght.woff2") format("woff2");
 }
 
+/* ==========================================================
+   Meine Welt der Bücher – Stylesheet
+   Aufbau:
+   1. Grundeinstellungen und Farben (Hell / Dunkel)
+   2. Typografie und allgemeine Elemente
+   3. Layout-Bausteine (Abschnitte, Buttons, Labels)
+   4. Kopfzeile und Fusszeile (inkl. Logo-Wechsel)
+   5. Buch-Karussell (Startseite)
+   6. Karten, Bild-Text-Bereich, Statistik
+   7. Wechselnde Zitate (reine CSS-Animation)
+   8. Buchseiten (Sterne, Zurück-Link)
+   9. Kontaktformular
+  10. Anpassungen für Bewegung und kleine Bildschirme
+   ========================================================== */
+
+
+/* ---------- 1. Grundeinstellungen und Farben ---------- */
+
+/* Padding und Rahmen werden in die Breite/Höhe eingerechnet,
+   damit Elemente nicht breiter werden als angegeben */
 *,
 ::before,
 ::after {
     box-sizing: border-box;
 }
 
+/* Farbvariablen für den Hell-Modus (Standard). */
 :root {
-    --primary: #8c2f39;
-    --primary-contrast: #f9f9f9;
-    --background-light: #faf6ee;
-    --background-dark: #f5efe6;
-    --text-light: #1f2a44;
-    --text-dark: #1c2437;
+    --primary: #8c2f39;           /* Akzentfarbe (Buttons, Punkte, Sterne) */
+    --primary-contrast: #f9f9f9;  /* Schrift auf Primary-Flächen */
+    --background-light: #faf6ee;  /* Haupthintergrund */
+    --background-dark: #f5efe6;   /* zweiter Hintergrund (abgesetzte Abschnitte) */
+    --text-light: #1f2a44;        /* Text auf dem Haupthintergrund */
+    --text-dark: #1c2437;         /* Text auf dem zweiten Hintergrund */
 }
 
+/* Gleiche Variablen mit anderen Werten im Dunkel-Modus.
+   Das JavaScript setzt data-theme="dark" am body-Element */
 body[data-theme=dark] {
     --primary: #d98a8f;
     --primary-contrast: #f9f9f9;
@@ -27,10 +50,14 @@ body[data-theme=dark] {
     --text-dark: #f5efe6;
 }
 
+/* Weiches Scrollen, z. B. beim Blättern im Karussell */
 html {
     scroll-behavior: smooth;
 }
 
+/* Grundstil der Seite: Schrift, Hintergrund und Textfarbe.
+   --bg und --tx sind die "aktuellen" Farben, die Abschnitte
+   (siehe .alt) überschreiben können */
 body {
     --bg: var(--background-light);
     --tx: var(--text-light);
@@ -42,12 +69,17 @@ body {
     font-size: 1.125rem;
 }
 
+
+/* ---------- 2. Typografie und allgemeine Elemente ---------- */
+
+/* Überschriften: eng gesetzt, kleiner Abstand nach unten */
 h1,
 h2 {
     line-height: 1.2;
     margin: 0 0 .5em;
 }
 
+/* Grösse passt sich der Bildschirmbreite an (clamp = min, ideal, max) */
 h1 {
     font-size: clamp(2rem,5vw,3.5rem);
 }
@@ -56,25 +88,45 @@ h2 {
     font-size: clamp(1.5rem,3vw,2.25rem);
 }
 
+/* Zwischenüberschriften (z. B. "Mein Rating" auf den Buchseiten) */
+h3 {
+    font-size: 1.4rem;
+    line-height: 1.2;
+    margin: 1.5rem 0 .5rem;
+}
+
+/* Links übernehmen die Textfarbe der Umgebung */
 a {
     color: inherit;
 }
 
+/* Listen ohne Punkte (für Navigation und Karussell-Punkte) */
 ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
+/* Sichtbarer Rahmen, wenn jemand per Tastatur navigiert (Barrierefreiheit) */
 :focus-visible {
     outline: 3px solid var(--primary);
     outline-offset: 3px;
 }
 
+/* Hilfsklasse: Text zentrieren */
+.center {
+    text-align: center;
+}
+
+
+/* ---------- 3. Layout-Bausteine ---------- */
+
+/* Ein Abschnitt der Seite mit Luft oben/unten und seitlichem Rand */
 .wrap {
     padding: 4rem clamp(1rem,6vw,6rem);
 }
 
+/* Abgesetzter Abschnitt: zweiter Hintergrund und zweite Textfarbe */
 .alt {
     --bg: var(--background-dark);
     --tx: var(--text-dark);
@@ -82,6 +134,18 @@ ul {
     color: var(--tx);
 }
 
+/* Schmaler Abschnitt (Zurück-Link auf den Buchseiten):
+   wenig Abstand, damit der Link nah am Inhalt sitzt */
+.wrap.tight {
+    padding-top: 2rem;
+    padding-bottom: 0;
+}
+
+.wrap.tight + .wrap {
+    padding-top: 2rem;
+}
+
+/* Kleines Label in Grossbuchstaben (z. B. "KONTAKT", Genre) */
 .lbl {
     font-size: .9rem;
     letter-spacing: .1em;
@@ -89,6 +153,7 @@ ul {
     margin: 0;
 }
 
+/* Button: gefüllt in Primary, abgerundete Ecken */
 .btn {
     display: inline-block;
     background: var(--primary);
@@ -101,6 +166,7 @@ ul {
     cursor: pointer;
 }
 
+/* Zweite Button-Variante: nur Rahmen, kein Hintergrund */
 .btn.ghost {
     background: none;
     color: var(--tx);
@@ -108,10 +174,23 @@ ul {
     font-weight: 500;
 }
 
+/* Beim Darüberfahren etwas heller */
 .btn:hover {
     filter: brightness(1.15);
 }
 
+/* Container für den "Alle Bücher ansehen"-Button */
+.more {
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
+
+/* ---------- 4. Kopfzeile und Fusszeile ---------- */
+
+/* Beide Leisten: drei Spalten (Logo | Navigation | Rechts).
+   Die mittlere Spalte passt sich dem Inhalt an, links und rechts
+   teilen sich den Rest, so bleibt die Navigation mittig */
 .site-header,
 .site-footer {
     display: grid;
@@ -122,15 +201,19 @@ ul {
     min-height: 110px;
 }
 
+/* Linie unter der Kopfzeile */
 .site-header {
     border-bottom: 2px solid var(--tx);
 }
 
+/* Fusszeile: Farben umgekehrt (Text-Farbe als Hintergrund) –
+   im Hell-Modus dunkel, im Dunkel-Modus hell */
 .site-footer {
     background: var(--text-light);
     color: var(--background-light);
 }
 
+/* Navigation: Links nebeneinander, in der Mitte */
 .site-header ul,
 .site-footer ul {
     display: flex;
@@ -139,6 +222,7 @@ ul {
     flex-wrap: wrap;
 }
 
+/* Navigationslinks ohne Unterstreichung, mit genug Klickfläche */
 .site-header a,
 .site-footer a {
     text-decoration: none;
@@ -146,6 +230,8 @@ ul {
     display: inline-block;
 }
 
+/* Hell/Dunkel-Button (Kopfzeile) und Copyright (Fusszeile)
+   stehen rechts aussen */
 .site-header .theme,
 .site-footer p {
     justify-self: end;
@@ -155,16 +241,19 @@ ul {
     margin: 0;
 }
 
+/* Logo-Link steht links aussen */
 .logo {
     font-weight: 700;
     font-size: 1.25rem;
     justify-self: start;
 }
 
+/* Seite, auf der man sich gerade befindet: fett */
 [aria-current=page] {
     font-weight: 700;
 }
 
+/* Der Hell/Dunkel-Umschalter sieht aus wie Text, nicht wie ein Button */
 .theme {
     background: none;
     border: 0;
@@ -174,10 +263,61 @@ ul {
     min-height: 44px;
 }
 
+/* Logo-Bilder: gleiche Höhe, Breite folgt automatisch */
+.logo img {
+    height: 48px;
+    width: auto;
+    display: block;
+}
+
+/* --- Logo-Wechsel Hell / Dunkel ---
+   Im HTML liegen immer beide Logos. CSS blendet das passende ein.
+   Wichtig: ".site-header .logo-dark" ist spezifischer als ".logo img",
+   sonst würde "display: block" das Verstecken überschreiben */
+
+/* Kopfzeile, Hell-Modus: nur das helle Logo (das dunkle ist versteckt) */
+.site-header .logo-dark {
+    display: none;
+}
+
+/* Kopfzeile, Dunkel-Modus: nur das dunkle Logo */
+body[data-theme=dark] .site-header .logo-light {
+    display: none;
+}
+
+body[data-theme=dark] .site-header .logo-dark {
+    display: block;
+}
+
+/* Fusszeile ist umgekehrt gefärbt, deshalb auch das Logo umgekehrt:
+   Hell-Modus (dunkler Footer): dunkles Logo */
+.site-footer .logo-light {
+    display: none;
+}
+
+.site-footer .logo-dark {
+    display: block;
+}
+
+/* Fusszeile, Dunkel-Modus (heller Footer): helles Logo */
+body[data-theme=dark] .site-footer .logo-light {
+    display: block;
+}
+
+body[data-theme=dark] .site-footer .logo-dark {
+    display: none;
+}
+
+
+/* ---------- 5. Buch-Karussell (Startseite) ---------- */
+
 .carousel {
     margin-top: 1.5rem;
 }
 
+/* Die Spur: alle Slides nebeneinander, seitlich scrollbar.
+   scroll-snap sorgt dafür, dass genau ein Slide einrastet.
+   Die Scrollleiste ist ausgeblendet */
 .track {
     display: flex;
     overflow-x: auto;
@@ -190,6 +330,7 @@ ul {
     display: none;
 }
 
+/* Ein Slide füllt die volle Breite: Pfeil | Buch | Pfeil */
 .slide {
     flex: 0 0 100%;
     scroll-snap-align: start;
@@ -199,6 +340,7 @@ ul {
     gap: 1rem;
 }
 
+/* Runde Pfeil-Buttons zum Blättern */
 .arrow {
     display: grid;
     place-items: center;
@@ -210,6 +352,7 @@ ul {
     font-size: 1.6rem;
 }
 
+/* Das aufgeschlagene Buch: zwei Seiten nebeneinander */
 .book {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -217,6 +360,7 @@ ul {
     position: relative;
 }
 
+/* Doppelte Linie in der Mitte = Buchfalz */
 .book::after {
     content: "";
     position: absolute;
@@ -226,6 +370,7 @@ ul {
     border-left: 3px double var(--tx);
 }
 
+/* Linke Seite (Cover) und rechte Seite (Text) */
 .left,
 .right {
     padding: 2rem clamp(1rem,4vw,4rem);
@@ -242,11 +387,21 @@ ul {
     margin: .5rem 0;
 }
 
+/* Der Button sitzt unten auf der rechten Seite */
+.right .btn {
+    align-self: flex-start;
+    margin-top: auto;
+    margin-bottom: 2.5rem;
+}
+
+/* Cover-Bild: füllt die Fläche, wird zugeschnitten statt verzerrt */
 .cover {
     flex: 1;
     width: 100%;
     min-height: 300px;
     border: 2px solid var(--tx);
+    display: block;
+    object-fit: cover;
 }
 
 .left .cover {
@@ -254,16 +409,13 @@ ul {
     margin: 0 auto;
 }
 
+/* Kleine Seitenzahl unter Cover bzw. Text */
 .pg {
     font-size: .75rem;
     margin: 1rem 0 0;
 }
 
-.right .btn {
-    align-self: flex-start;
-    margin-top: auto;
-}
-
+/* Punkte unter dem Buch (einer pro Buch) */
 .dots {
     grid-column: 1/-1;
     display: flex;
@@ -272,6 +424,7 @@ ul {
     margin-top: 1rem;
 }
 
+/* Klickfläche 24 x 24 px (gut antippbar) */
 .dots a {
     display: block;
     width: 24px;
@@ -279,6 +432,7 @@ ul {
     position: relative;
 }
 
+/* Der sichtbare Kreis in der Klickfläche */
 .dots a::after {
     content: "";
     position: absolute;
@@ -287,25 +441,35 @@ ul {
     border-radius: 50%;
 }
 
+/* Aktuelles Buch: Punkt in Primary gefüllt */
 .dots a[aria-current=true]::after {
     background: var(--primary);
     border-color: var(--primary);
 }
 
+
+/* ---------- 6. Karten, Bild-Text-Bereich, Statistik ---------- */
+
+/* Raster für Buchkarten: so viele Spalten wie Platz haben (min. 240 px) */
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    grid-template-columns: repeat(3,1fr);       /* immer 3 Spalten nebeneinander */
     gap: 2rem;
 }
 
+/* Eine Buchkarte mit Rahmen.
+   position: relative wird für den Klick-Trick weiter unten gebraucht */
 .card {
+    position: relative;
     border: 1px solid var(--tx);
     padding: 1.5rem;
     text-align: left;
 }
 
+/* Cover in der Karte: feste Höhe */
 .card .cover {
     flex: none;
+    width: 100%;
     height: 300px;
 }
 
@@ -319,11 +483,19 @@ ul {
     font-size: .9rem;
 }
 
-.more {
-    text-align: center;
-    margin-top: 2.5rem;
+/* Klick-Trick: Der Link im Titel wird unsichtbar über die ganze Karte
+   gelegt, so ist die ganze Karte anklickbar (und trotzdem nur ein Link) */
+.stretch {
+    padding: 0;
 }
 
+.stretch::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+/* Bild und Text nebeneinander (zwei gleich breite Spalten) */
 .split {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -331,15 +503,25 @@ ul {
     align-items: start;
 }
 
+/* Bild im Split-Bereich: volle Spaltenbreite, Standard quadratisch */
 .split .cover {
-    min-height: 380px;
-    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 1/1;
 }
 
-.portrait {
-    min-height: 520px;
+/* Querformat (Bild "Warum ich Bücher liebe") */
+.split .cover.wide {
+    aspect-ratio: 707/461;
 }
 
+/* Hochformat (Porträt auf "Über mich") */
+.split .cover.portrait {
+    aspect-ratio: 563/780;
+}
+
+/* Statistik: drei Kästen nebeneinander, bei wenig Platz untereinander */
 .stats {
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
@@ -353,11 +535,16 @@ ul {
     margin: 0;
 }
 
+/* Die grosse Zahl (z. B. "124") über der Beschreibung */
 .stat strong {
     display: block;
     font-size: 2.5rem;
 }
 
+
+/* ---------- 7. Wechselnde Zitate (nur CSS, kein JavaScript) ---------- */
+
+/* Alle Zitate liegen übereinander in derselben Rasterzelle */
 .quotes {
     display: grid;
     max-width: 44rem;
@@ -365,6 +552,9 @@ ul {
     text-align: center;
 }
 
+/* Ein Zitat: zuerst unsichtbar. --i ist die Nummer des Zitats (0–6),
+   daraus ergibt sich die Wartezeit: jedes Zitat startet 15 s nach dem
+   vorherigen. Eine Runde dauert 7 x 15 s = 105 s */
 .q {
     --i: 0;
     grid-area: 1/1;
@@ -384,6 +574,8 @@ ul {
     margin: 0 0 .5rem;
 }
 
+/* Ablauf eines Zitats: einblenden, stehen lassen, ausblenden, verstecken.
+   14,29 % von 105 s entsprechen genau 15 s */
 @keyframes qshow {
     0% {
         opacity: 0;
@@ -405,10 +597,12 @@ ul {
     }
 }
 
+/* Mit der Maus darüber: Zitat bleibt stehen (zum in Ruhe lesen) */
 .quotes:hover .q {
     animation-play-state: paused;
 }
 
+/* Punkte unter dem Zitat */
 .qdots {
     display: flex;
     justify-content: center;
@@ -416,6 +610,7 @@ ul {
     margin-top: 1.5rem;
 }
 
+/* Jeder Punkt wird genau dann Primary, wenn sein Zitat dran ist */
 .qdots span {
     --i: 0;
     width: 10px;
@@ -437,16 +632,53 @@ ul {
     }
 }
 
+
+/* ---------- 8. Buchseiten ---------- */
+
+/* "← Zurück zu allen Büchern" */
+.back {
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.back:hover {
+    text-decoration: underline;
+}
+
+/* Sterne-Bewertung in Primary */
+.stars {
+    font-size: 2rem;
+    margin: 0;
+    color: var(--primary);
+}
+
+/* Zahl unter den Sternen (z. B. "4.5 / 5") */
+.score {
+    font-weight: 500;
+    font-size: 1.25rem;
+    margin: 0 0 1.5rem;
+}
+
+/* Kurzer Einleitungssatz im Beschrieb: etwas kräftiger */
+.lead {
+    font-weight: 500;
+}
+
+
+/* ---------- 9. Kontaktformular ---------- */
+
 form {
     max-width: 60rem;
 }
 
+/* Beschriftung über jedem Feld */
 label {
     display: block;
     font-weight: 500;
     margin: 1.25rem 0 .4rem;
 }
 
+/* Eingabefelder: volle Breite, gleiche Schrift wie die Seite */
 input,
 textarea {
     width: 100%;
@@ -457,14 +689,22 @@ textarea {
     padding: .8rem 1rem;
 }
 
+/* Nachrichtenfeld ist höher */
 textarea {
     min-height: 240px;
 }
 
+/* Impressum darf die volle Breite nutzen */
 .impressum {
     max-width: none;
 }
 
+
+/* ---------- 10. Bewegung und kleine Bildschirme ---------- */
+
+/* Wer im Betriebssystem "Bewegung reduzieren" eingestellt hat:
+   kein weiches Scrollen, keine Zitat-Animation.
+   Stattdessen bleibt das erste Zitat einfach stehen */
 @media (prefers-reduced-motion: reduce) {
     html,
     .track {
@@ -483,7 +723,9 @@ textarea {
     }
 }
 
+/* Schmale Bildschirme (Handy, bis 800 px Breite) */
 @media (max-width:  800px) {
+    /* Karussell: Buch oben, darunter die beiden Pfeile links und rechts */
     .slide {
         grid-template-columns: 1fr 1fr;
     }
@@ -492,6 +734,7 @@ textarea {
         order: -1;
         grid-template-columns: 1fr;
     }
+    /* Buchfalz-Linie weglassen, da nur noch eine Spalte */
     .book::after {
         display: none;
     }
@@ -501,9 +744,12 @@ textarea {
     .next {
         justify-self: end;
     }
+    /* Bild und Text untereinander statt nebeneinander */
     .split {
         grid-template-columns: 1fr;
     }
+    /* Kopf- und Fusszeile: alles untereinander und zentriert
+       (Logo, Navigation, Hell/Dunkel bzw. Copyright) */
     .site-header,
     .site-footer {
         grid-template-columns: 1fr;
@@ -517,125 +763,4 @@ textarea {
     .site-footer p {
         justify-self: center;
     }
-}
-
-.logo img {
-    height: 48px;
-    width: auto;
-    display: block;
-}
-
-.logo-dark {
-    display: none;
-}
-
-body[data-theme=dark] .site-header .logo-light {
-    display: none;
-}
-
-body[data-theme=dark] .site-header .logo-dark {
-    display: block;
-}
-
-.site-footer .logo-light {
-    display: none;
-}
-
-.site-footer .logo-dark {
-    display: block;
-}
-
-body[data-theme=dark] .site-footer .logo-light {
-    display: block;
-}
-
-body[data-theme=dark] .site-footer .logo-dark {
-    display: none;
-}
-
-.center {
-    text-align: center;
-}
-
-.cover {
-    display: block;
-    object-fit: cover;
-}
-
-.split .cover {
-    width: 100%;
-    height: auto;
-    min-height: 0;
-    aspect-ratio: 1/1;
-}
-
-.split .cover.wide {
-    aspect-ratio: 707/461;
-}
-
-.split .cover.portrait {
-    aspect-ratio: 563/780;
-}
-
-.card {
-    position: relative;
-}
-
-.card .cover {
-    width: 100%;
-}
-
-.stretch::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-}
-
-.stretch {
-    padding: 0;
-}
-
-.back {
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.back:hover {
-    text-decoration: underline;
-}
-
-.stars {
-    font-size: 2rem;
-    margin: 0;
-    color: var(--primary);
-}
-
-.score {
-    font-weight: 500;
-    font-size: 1.25rem;
-    margin: 0 0 1.5rem;
-}
-
-.lead {
-    font-weight: 500;
-}
-
-h3 {
-    font-size: 1.4rem;
-    line-height: 1.2;
-    margin: 1.5rem 0 .5rem;
-}
-
-.card h3 {
-    font-size: 1rem;
-    margin: 1rem 0 0;
-}
-
-.wrap.tight {
-    padding-top: 2rem;
-    padding-bottom: 0;
-}
-
-.wrap.tight + .wrap {
-    padding-top: 2rem;
 }

@@ -470,6 +470,9 @@ body[data-theme=dark] .site-footer .logo-dark {
     padding: 1.5rem;
     text-align: left;
 }
+.card:hover {
+    background: var(--background-dark);
+}
 
 /* Cover in der Karte: Hochformat wie im Figma, mittig, nichts abgeschnitten */
 .card .cover {
@@ -774,6 +777,7 @@ textarea {
     .card {
         padding: 1rem;
     }
+
     /* Lieblingsbücher auf der Startseite: Cover links, Titel und Autor daneben */
     .cards.liste {
         grid-template-columns: 1fr;

@@ -1,10 +1,213 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/theme-toggle.js" defer></script>
+    <title>Alle Bücher | Meine Welt der Bücher</title>
 </head>
 <body>
-
+<!-- ===== Kopfzeile: Logo, Navigation, Hell/Dunkel-Umschalter ===== -->
+<header class="site-header">
+    <a class="logo" href="index.html">
+        <img class="logo-light" src="img/logo_light_mode.png" alt="Logo von Meiner Welt der Bücher">
+        <img class="logo-dark" src="img/logo_dark_mode.png" alt="">
+    </a>
+    <nav>
+        <ul>
+            <li>
+                <a href="index.html" aria-current="page">
+                    Start
+                </a>
+            </li>
+            <li>
+                <a href="ueber-mich.html">
+                    Über mich
+                </a>
+            </li>
+            <li>
+                <a href="kontakt-und-impressum.html">
+                    Kontakt &amp; Impressum
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <button class="theme" id="toggle-theme" type="button">
+        &#9680; Hell / Dunkel
+    </button>
+</header>
+<main>
+    <!-- Übersicht aller 12 Bücher als Kartenraster; jede Karte führt zur Buchseite -->
+    <section class="wrap">
+        <h1 id="h-alle" class="center">
+            Alle Bücher
+        </h1>
+        <div class="cards">
+            <article class="card">
+                <img class="cover" src="img/the_book_of_doors.jpg" alt="Cover von The Book of Doors" loading="lazy">
+                <h3>
+                    <a class="stretch" href="buch-the-book-of-doors.html">
+                        The Book of Doors
+                    </a>
+                </h3>
+                <p>
+                    Gareth Brown
+                </p>
+            </article>
+            <article class="card">
+                <img class="cover" src="img/img_glad_my_mom_died.jpg" alt="Cover von I'm Glad My Mom Died" loading="lazy">
+                <h3>
+                    <a class="stretch" href="buch-im-glad-my-mom-died.html">
+                        I'm Glad My Mom Died
+                    </a>
+                </h3>
+                <p>
+                    Jenette McCurdy
+                </p>
+            </article>
+            <article class="card">
+                <img class="cover" src="img/the_midnight_library.jpg" alt="Cover von The Midnight Library" loading="lazy">
+                <h3>
+                    <a class="stretch" href="buch-the-midnight-library.html">
+                        The Midnight Library
+                    </a>
+                </h3>
+                <p>
+                    Matt Haig
+                </p>
+            </article>
+            <article class="card">
+                <img class="cover" src="img/the_alchemist.jpg" alt="Cover von The Alchemist" loading="lazy">
+                <h3>
+                    <a class="stretch" href="buch-the-alchemist.html">
+                        The Alchemist
+                    </a>
+                </h3>
+                <p>
+                    Paulo Coelho
+                </p>
+            </article>
+            <article class="card">
+                <img class="cover" src="img/theo_of_golden.jpg" alt="Cover von Theo of Golden" loading="lazy">
+                <h3>
+                    <a class="stretch" href="buch-theo-of-golden.html">
+                        Theo of Golden
+                    </a>
+                </h3>
+                <p>
+                    Allen Levi
+                </p>
+            </article>
+            <article class="card">
+                <img class="cover" src="img/lessons_in_chemistry.jpg" alt="Cover von Lessons In Chemistry" loading="lazy">
+                <h3>
+                    <a class="stretch" href="buch-lessons-in-chemistry.html">
+                        Lessons In Chemistry
+                    </a>
+                </h3>
+                <p>
+                    Bonnie Garmus
+                </p>
+            </article>
+            <article class="card">
+                <img class="cover" src="img/loved_one.jpg" alt="Cover von Loved One" loading="lazy">
+                <h3>
+                    <a class="stretch" href="buch-loved-one.html">
+                        Loved One
+                    </a>
+                </h3>
+                <p>
+                    Aisha Muharrar
+                </p>
+            </article>
+            <article class="card">
+                <img class="cover" src="img/our_infinite_fates.jpg" alt="Cover von Our Infinite Fates" loading="lazy">
+                <h3>
+                    <a class="stretch" href="buch-our-infinite-fates.html">
+                        Our Infinite Fates
+                    </a>
+                </h3>
+                <p>
+                    Laura Steven
+                </p>
+            </article>
+            <article class="card">
+                <img class="cover" src="img/the_night_we_met.jpg" alt="Cover von The Night We Met" loading="lazy">
+                <h3>
+                    <a class="stretch" href="buch-the-night-we-met.html">
+                        The Night We Met
+                    </a>
+                </h3>
+                <p>
+                    Abby Jimenez
+                </p>
+            </article>
+            <article class="card">
+                <img class="cover" src="img/the_wedding_people.jpg" alt="Cover von The Wedding People" loading="lazy">
+                <h3>
+                    <a class="stretch" href="buch-the-wedding-people.html">
+                        The Wedding People
+                    </a>
+                </h3>
+                <p>
+                    Alison Espach
+                </p>
+            </article>
+            <article class="card">
+                <img class="cover" src="img/love_theoratically.jpg" alt="Cover von Love, Theoretically" loading="lazy">
+                <h3>
+                    <a class="stretch" href="buch-love-theoretically.html">
+                        Love, Theoretically
+                    </a>
+                </h3>
+                <p>
+                    Ali Hazelwood
+                </p>
+            </article>
+            <article class="card">
+                <img class="cover" src="img/project_hail_mary.jpg" alt="Cover von Project Hail Mary" loading="lazy">
+                <h3>
+                    <a class="stretch" href="buch-project-hail-mary.html">
+                        Project Hail Mary
+                    </a>
+                </h3>
+                <p>
+                    Andy Weir
+                </p>
+            </article>
+        </div>
+    </section>
+</main>
+<footer class="site-footer">
+    <a class="logo" href="index.html">
+        <img class="logo-light" src="img/logo_light_mode.png" alt="Logo von Meiner Welt der Bücher">
+        <img class="logo-dark" src="img/logo_dark_mode.png" alt="">
+    </a>
+    <!-- Zweite Navigation, damit man am Seitenende nicht hochscrollen muss -->
+    <nav>
+        <ul>
+            <li>
+                <a href="index.html">
+                    Start</a>
+            </li>
+            <li>
+                <a href="ueber-mich.html">
+                    Über mich
+                </a>
+            </li>
+            <li>
+                <a href="kontakt-und-impressum.html">
+                    Kontakt &amp; Impressum
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <p>
+        &copy; 2026 Salome
+    </p>
+</footer>
 </body>
 </html>

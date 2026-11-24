@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/theme-toggle.js" defer></script>
+    <title> Kontakt &amp; Impressum | Meine Welt der Bücher</title>
+</head>
+<body>
+<header class="site-header">
+    <a class="logo" href="index.html">
+        <img class="logo-light" src="img/logo_light_mode.png" alt="Logo von Meiner Welt der Bücher">
+        <img class="logo-dark" src="img/logo_dark_mode.png" alt="">
+    </a>
+    <nav>
+        <ul>
+            <li>
+                <a href="index.html">
+                    Start
+                </a>
+            </li>
+            <li>
+                <a href="ueber-mich.html">
+                    Über mich
+                </a>
+            </li>
+            <li>
+                <a href="kontakt-und-impressum.html" aria-current="page">
+                    Kontakt &amp; Impressum
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <button class="theme" id="toggle-theme" type="button">
+        &#9680; Hell / Dunkel
+    </button>
+</header>
+<main>
+    <!-- Kontaktformular (ohne Funktion: das Absenden lädt nur die Seite neu).
+           for/id verbinden jede Beschriftung mit ihrem Feld -->
+    <section class="wrap">
+        <p class="lbl">
+            Kontakt
+        </p>
+        <h1 id="h-kontakt">
+            Schreib mir
+        </h1>
+        <form action="kontakt-und-impressum.html" method="get">
+            <label for="name">
+                Name
+            </label>
+            <input type="text" id="name" name="name" autocomplete="name" required>
+            <label for="email">
+                E-Mail
+            </label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+            <label for="betreff">
+                Betreff
+            </label>
+            <input type="text" id="betreff" name="betreff" required>
+            <label for="nachricht">
+                Nachricht
+            </label>
+            <textarea id="nachricht" name="nachricht" required>
+            </textarea>
+            <p>
+                <button class="btn" type="submit">
+                    Nachricht senden
+                </button>
+            </p>
+        </form>
+    </section>
+    <!-- Impressum und Haftungshinweis -->
+    <section class="wrap alt impressum" id="impressum">
+        <p class="lbl">
+            Impressum
+        </p>
+        <h2 id="h-imp">
+            Angaben
+        </h2>
+        <!-- address: semantisches Element für Kontaktangaben -->
+        <address>
+            Salome Matter <br>
+            Luzernerstrasse 59C <br>
+            6030 Ebikon <br>
+            <a href="mailto:salome.matter@students.fhgr.ch">
+                salome.matter@students.fhgr.ch
+            </a>
+        </address>
+        <h2 class="abstand" id="h-haftung">
+            Haftungshinweis
+        </h2>
+        <p>
+            Der Autor übernimmt keinerlei Gewähr hinsichtlich der inhaltlichen Richtigkeit, Genauigkeit, Aktualität, Zuverlässigkeit und Vollständigkeit der Informationen. Haftungsansprüche gegen den Autor wegen Schäden materieller oder immaterieller Art, welche aus dem Zugriff oder der Nutzung bzw. Nichtnutzung der veröffentlichten Informationen, durch Missbrauch der Verbindung oder durch technische Störungen entstanden sind, werden ausgeschlossen.
+        </p>
+    </section>
+</main>
+<!-- ===== Fusszeile: Logo, Navigation, Copyright ===== -->
+<footer class="site-footer">
+    <a class="logo" href="index.html">
+        <img class="logo-light" src="img/logo_light_mode.png" alt="Logo von Meiner Welt der Bücher">
+        <img class="logo-dark" src="img/logo_dark_mode.png" alt="">
+    </a>
+    <!-- Zweite Navigation, damit man am Seitenende nicht hochscrollen muss -->
+    <nav>
+        <ul>
+            <li>
+                <a href="index.html">
+                    Start
+                </a>
+            </li>
+            <li>
+                <a href="ueber-mich.html">
+                    Über mich
+                </a>
+            </li>
+            <li>
+                <a href="kontakt-und-impressum.html">
+                    Kontakt &amp; Impressum
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <p>
+        &copy; 2026 Salome
+    </p>
+</footer>
+</body>
+</html>

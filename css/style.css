@@ -709,6 +709,11 @@ textarea {
     max-width: none;
 }
 
+/* Mehr Luft über dem Haftungshinweis, zur E-Mail-Adresse darüber */
+.abstand {
+    margin-top: 2.5rem;
+}
+
 
 /* ---------- 10. Bewegung und kleine Bildschirme ---------- */
 
